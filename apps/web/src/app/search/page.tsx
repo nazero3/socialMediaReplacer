@@ -3,8 +3,6 @@ import { searchArticles } from '@/lib/api';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 
-export const dynamic = 'force-dynamic';
-
 export default async function SearchPage({
   searchParams,
 }: {

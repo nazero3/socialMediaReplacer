@@ -20,10 +20,7 @@ export default async function HomePage() {
       <h1 style={{ fontSize: '2.4rem', margin: 0 }}>Today</h1>
       <p className="lede">A finite list. Read what calls to you. Close the tab when you&apos;re done.</p>
       {items.length === 0 ? (
-        <p>
-          No articles yet. If you just installed, run <code>pnpm --filter @smr/api db:seed</code> or
-          trigger an ingest from the worker.
-        </p>
+        <p>No feed items available right now. Try again in a minute.</p>
       ) : (
         <div className="card-list">
           {items.map((a) => (

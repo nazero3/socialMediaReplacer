@@ -6,6 +6,9 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 
 export const revalidate = 60;
+export function generateStaticParams() {
+  return [{ slug: 'tech' }, { slug: 'news' }, { slug: 'diy' }, { slug: 'til' }];
+}
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

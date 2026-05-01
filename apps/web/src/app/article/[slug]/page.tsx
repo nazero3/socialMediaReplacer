@@ -7,8 +7,13 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { ArticleBody } from '@/components/ArticleBody';
 import { FontSizeToggle } from '@/components/FontSizeToggle';
+import { getFeedArticles } from '@/lib/feeds';
 
 export const revalidate = 300;
+export async function generateStaticParams() {
+  const articles = await getFeedArticles();
+  return articles.map((a) => ({ slug: a.slug }));
+}
 
 export async function generateMetadata({
   params,
