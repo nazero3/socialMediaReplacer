@@ -1,4 +1,3 @@
-import { cache } from 'react';
 import type { ArticleDetail, ArticleSummary, Category } from '@smr/types';
 
 type FeedRecord = {
@@ -164,6 +163,8 @@ function slugify(s: string): string {
     .slice(0, 100);
 }
 
+let feedPromise: Promise<ArticleDetail[]> | null = null;
+
 const _getFeedArticles = async (): Promise<ArticleDetail[]> => {
   const [reddit, hn, wiki] = await Promise.all([fetchReddit(), fetchHn(), fetchWikipediaTil()]);
   const merged = [...reddit, ...hn, ...wiki];
@@ -180,7 +181,12 @@ const _getFeedArticles = async (): Promise<ArticleDetail[]> => {
     .map(toArticle);
 };
 
-export const getFeedArticles: () => Promise<ArticleDetail[]> = cache(_getFeedArticles);
+export function getFeedArticles(): Promise<ArticleDetail[]> {
+  if (!feedPromise) {
+    feedPromise = _getFeedArticles();
+  }
+  return feedPromise;
+}
 
 export async function getFeedSummaries(params: {
   category?: string;
