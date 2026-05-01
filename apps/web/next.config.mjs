@@ -9,10 +9,8 @@ const nextConfig = {
   trailingSlash: isStaticExport,
   basePath,
   assetPrefix: basePath || undefined,
+  typedRoutes: false,
   transpilePackages: ['@smr/types', '@smr/theme', '@smr/ui', '@smr/content'],
-  experimental: {
-    typedRoutes: false,
-  },
   ...(isStaticExport
     ? {}
     : {

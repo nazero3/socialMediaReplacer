@@ -5,7 +5,7 @@ function block(selector: string, vars: Record<string, string | number>): string 
   return `${selector} {\n${lines.join('\n')}\n}`;
 }
 
-function paletteToVars(p: typeof palette.light): Record<string, string> {
+function paletteToVars(p: (typeof palette)[keyof typeof palette]): Record<string, string> {
   return {
     '--color-background': p.background,
     '--color-surface': p.surface,
