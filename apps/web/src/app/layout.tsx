@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import { cssVariables } from '@smr/theme';
 import './globals.css';
 
@@ -16,7 +15,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: unknown }) {
+// Next's generated LayoutProps type can conflict with workspace ReactNode versions in CI.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -37,7 +38,7 @@ export default function RootLayout({ children }: { children: unknown }) {
           }}
         />
       </head>
-      <body>{children as ReactNode}</body>
+      <body>{children}</body>
     </html>
   );
 }
