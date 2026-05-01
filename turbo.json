@@ -1,0 +1,40 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "DATABASE_URL",
+    "REDIS_URL",
+    "API_PORT",
+    "API_PUBLIC_URL",
+    "NEXT_PUBLIC_API_URL",
+    "NEXT_PUBLIC_SITE_URL",
+    "ADMIN_TOKEN",
+    "REDDIT_USER_AGENT",
+    "LLM_PROVIDER",
+    "OPENAI_API_KEY",
+    "OPENAI_MODEL",
+    "ANTHROPIC_API_KEY",
+    "OLLAMA_URL",
+    "INGEST_CRON",
+    "DIGEST_CRON",
+    "INGEST_LIMIT_PER_SOURCE",
+    "LOG_LEVEL"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    }
+  }
+}

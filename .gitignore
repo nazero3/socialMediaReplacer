@@ -1,0 +1,16 @@
+node_modules
+.pnpm-store
+dist
+build
+.next
+.turbo
+.expo
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+coverage
+*.tsbuildinfo
+.vercel
+prisma/migrations/dev.db

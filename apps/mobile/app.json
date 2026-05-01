@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "socialMediaReplacer",
+    "slug": "social-media-replacer",
+    "version": "0.1.0",
+    "scheme": "smr",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#F4ECD8",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.socialmediareplacer"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F4ECD8"
+      },
+      "package": "com.example.socialmediareplacer"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "apiUrl": "http://localhost:4000"
+    }
+  }
+}

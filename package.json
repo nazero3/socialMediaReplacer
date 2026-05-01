@@ -1,0 +1,27 @@
+{
+  "name": "social-media-replacer",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A reader-first, multi-source blog platform that replaces social-media doomscrolling with calm daily reading.",
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "eslint": "^9.9.0",
+    "prettier": "^3.3.3",
+    "turbo": "^2.1.0",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.0.0"
+  }
+}

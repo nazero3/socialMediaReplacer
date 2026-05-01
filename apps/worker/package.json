@@ -1,0 +1,32 @@
+{
+  "name": "@smr/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc --noEmit",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "ingest:once": "tsx src/scripts/ingestOnce.ts",
+    "digest:once": "tsx src/scripts/digestOnce.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.18.0",
+    "@smr/content": "workspace:*",
+    "@smr/ingest": "workspace:*",
+    "@smr/types": "workspace:*",
+    "bullmq": "^5.12.0",
+    "ioredis": "^5.4.1",
+    "pino": "^9.3.2",
+    "pino-pretty": "^11.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}
