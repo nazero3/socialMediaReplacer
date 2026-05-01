@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { JSX } from 'react';
 import { ArticleCard } from '@smr/ui';
 import { getArticles } from '@/lib/api';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -6,7 +7,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 
 export const revalidate = 60;
 
-export default async function HomePage() {
+export default async function HomePage(): Promise<JSX.Element> {
   let items: Awaited<ReturnType<typeof getArticles>>['items'] = [];
   try {
     const data = await getArticles({ limit: 12 });

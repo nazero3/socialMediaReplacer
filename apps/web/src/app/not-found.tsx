@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import type { JSX } from 'react';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 
-export default function NotFound() {
+export default function NotFound(): JSX.Element {
   return (
     <main className="page">
       <SiteHeader />

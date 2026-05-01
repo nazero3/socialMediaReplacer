@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { JSX } from 'react';
 import { ArticleCard } from '@smr/ui';
 import { CATEGORY_LABELS, isCategory } from '@smr/types';
 import { getArticles } from '@/lib/api';
@@ -10,7 +11,11 @@ export function generateStaticParams() {
   return [{ slug: 'tech' }, { slug: 'news' }, { slug: 'diy' }, { slug: 'til' }];
 }
 
-export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<JSX.Element> {
   const { slug } = await params;
   if (!isCategory(slug)) notFound();
   let items: Awaited<ReturnType<typeof getArticles>>['items'] = [];

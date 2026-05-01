@@ -1,9 +1,10 @@
+import type { JSX } from 'react';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 
 export const metadata = { title: 'About' };
 
-export default function AboutPage() {
+export default function AboutPage(): JSX.Element {
   return (
     <main className="page">
       <SiteHeader />

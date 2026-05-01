@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { ArticleCard } from '@smr/ui';
 import { searchArticles } from '@/lib/api';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -7,7 +8,7 @@ export default async function SearchPage({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
-}) {
+}): Promise<JSX.Element> {
   const { q } = await searchParams;
   const query = (q ?? '').trim();
   let items: Awaited<ReturnType<typeof searchArticles>>['items'] = [];

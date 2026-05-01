@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import type { JSX } from 'react';
 import { CATEGORY_LABELS } from '@smr/types';
 import { extractToc, formatReadingTime } from '@smr/content';
 import { getArticleBySlug } from '@/lib/api';
@@ -38,7 +39,11 @@ export async function generateMetadata({
   }
 }
 
-export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<JSX.Element> {
   const { slug } = await params;
   let article;
   try {
