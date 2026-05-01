@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import { cssVariables } from '@smr/theme';
 import './globals.css';
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default function RootLayout({ children }: { children: unknown }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: { children: any }) {
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>{children as ReactNode}</body>
     </html>
   );
 }
