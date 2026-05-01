@@ -164,7 +164,7 @@ function slugify(s: string): string {
     .slice(0, 100);
 }
 
-export const getFeedArticles = cache(async (): Promise<ArticleDetail[]> => {
+const _getFeedArticles = async (): Promise<ArticleDetail[]> => {
   const [reddit, hn, wiki] = await Promise.all([fetchReddit(), fetchHn(), fetchWikipediaTil()]);
   const merged = [...reddit, ...hn, ...wiki];
   const seen = new Set<string>();
@@ -178,7 +178,9 @@ export const getFeedArticles = cache(async (): Promise<ArticleDetail[]> => {
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
     .slice(0, 40)
     .map(toArticle);
-});
+};
+
+export const getFeedArticles: () => Promise<ArticleDetail[]> = cache(_getFeedArticles);
 
 export async function getFeedSummaries(params: {
   category?: string;

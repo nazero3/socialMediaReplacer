@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import { CATEGORY_LABELS } from '@smr/types';
+import { CATEGORY_LABELS, type ArticleDetail } from '@smr/types';
 import { extractToc, formatReadingTime } from '@smr/content';
 import { getArticleBySlug } from '@/lib/api';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -12,8 +12,8 @@ import { getFeedArticles } from '@/lib/feeds';
 
 export const revalidate = 300;
 export async function generateStaticParams() {
-  const articles = await getFeedArticles();
-  return articles.map((a) => ({ slug: a.slug }));
+  const articles: ArticleDetail[] = await getFeedArticles();
+  return articles.map((a: ArticleDetail) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({
