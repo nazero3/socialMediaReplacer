@@ -26,6 +26,29 @@ function loadDotEnv(): void {
 
 loadDotEnv();
 
+function normalizeConnectionEnvVar(name: 'DATABASE_URL' | 'REDIS_URL'): void {
+  const raw = process.env[name];
+  if (!raw) return;
+
+  let v = raw.trim();
+  // Strip UTF-8 BOM if editors accidentally prepend it.
+  v = v.replace(/^\uFEFF/, '');
+
+  // If someone pasted `DATABASE_URL=postgresql://...` into the secret value.
+  const prefixed = new RegExp(`^${name}=`, 'i');
+  if (prefixed.test(v)) v = v.replace(prefixed, '');
+
+  // Strip wrapping quotes (common when copying from `.env` examples)
+  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+    v = v.slice(1, -1).trim();
+  }
+
+  process.env[name] = v;
+}
+
+normalizeConnectionEnvVar('DATABASE_URL');
+normalizeConnectionEnvVar('REDIS_URL');
+
 function required(name: string): string {
   const v = process.env[name];
   if (!v || v.length === 0) throw new Error(`Missing required env var ${name}`);
