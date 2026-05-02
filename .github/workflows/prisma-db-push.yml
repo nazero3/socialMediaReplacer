@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Validate connection string shape (avoids Prisma P1013)
+        run: bash scripts/validate-prisma-connection-env.sh
+
       - name: Validate DATABASE_URL for CI (Supabase pooler)
         run: bash scripts/check-github-actions-database-url.sh
 
