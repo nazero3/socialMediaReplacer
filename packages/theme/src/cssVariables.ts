@@ -1,11 +1,13 @@
-import { palette, fonts, lineHeights } from './tokens';
+import { palette, fonts, lineHeights, type ThemeName } from './tokens';
 
 function block(selector: string, vars: Record<string, string | number>): string {
   const lines = Object.entries(vars).map(([k, v]) => `  ${k}: ${v};`);
   return `${selector} {\n${lines.join('\n')}\n}`;
 }
 
-function paletteToVars(p: typeof palette.light): Record<string, string> {
+type PaletteSlot = (typeof palette)[ThemeName];
+
+function paletteToVars(p: PaletteSlot): Record<string, string> {
   return {
     '--color-background': p.background,
     '--color-surface': p.surface,

@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Next.js 15.5+: top-level flag (was `experimental.typedRoutes`)
+  typedRoutes: false,
   transpilePackages: ['@smr/types', '@smr/theme', '@smr/ui', '@smr/content'],
-  experimental: {
-    typedRoutes: false,
-  },
   async headers() {
     return [
       {
