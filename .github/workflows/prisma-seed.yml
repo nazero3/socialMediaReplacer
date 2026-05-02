@@ -1,0 +1,41 @@
+# One-time (or after empty DB): insert sample PUBLISHED articles via Prisma seed.
+# Repo → Actions → "Prisma seed" → Run workflow.
+# Requires the same DATABASE_URL / DIRECT_URL secrets as prisma-db-push.
+name: Prisma seed
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DIRECT_URL: ${{ secrets.DIRECT_URL || secrets.DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate connection string shape
+        run: bash scripts/validate-prisma-connection-env.sh
+
+      - name: Validate DATABASE_URL for CI (Supabase pooler)
+        run: bash scripts/check-github-actions-database-url.sh
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm --filter @smr/api exec prisma generate
+
+      - name: Seed database
+        run: pnpm --filter @smr/api run db:seed
