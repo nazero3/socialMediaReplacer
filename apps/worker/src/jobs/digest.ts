@@ -1,9 +1,9 @@
 import { dailySlug, readingTimeSeconds } from '@smr/content';
 import { CATEGORIES, type Category } from '@smr/types';
-import { prisma } from '../db.js';
-import { getLlmClient } from '../llm/index.js';
-import type { DigestSource } from '../llm/index.js';
-import { logger } from '../logger.js';
+import { prisma } from '../db';
+import { getLlmClient } from '../llm/index';
+import type { DigestSource } from '../llm/index';
+import { logger } from '../logger';
 
 const SOURCES_PER_DIGEST = 10;
 

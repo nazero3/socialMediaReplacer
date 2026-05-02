@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { isCategory } from '@smr/types';
-import { prisma } from '../db.js';
-import { toArticleDetail, toArticleSummary } from '../serializers.js';
+import { prisma } from '../db';
+import { toArticleDetail, toArticleSummary } from '../serializers';
 
 export async function articlesRoutes(app: FastifyInstance): Promise<void> {
   app.get('/articles', async (req, reply) => {

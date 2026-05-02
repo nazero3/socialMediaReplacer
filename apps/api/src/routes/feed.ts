@@ -1,8 +1,8 @@
 import type { FastifyInstance } from 'fastify';
-import { prisma } from '../db.js';
-import { env } from '../env.js';
-import { renderAtomFeed } from '../feed.js';
-import { toArticleSummary } from '../serializers.js';
+import { prisma } from '../db';
+import { env } from '../env';
+import { renderAtomFeed } from '../feed';
+import { toArticleSummary } from '../serializers';
 
 export async function feedRoutes(app: FastifyInstance): Promise<void> {
   app.get('/feed.xml', async (_req, reply) => {

@@ -1,5 +1,5 @@
 import { CATEGORY_LABELS } from '@smr/types';
-import type { DigestRequest } from './types.js';
+import type { DigestRequest } from './types';
 
 const SYSTEM = `You are the editor of a calm, reader-first daily digest.
 Your audience has chosen to read here instead of scrolling social media.

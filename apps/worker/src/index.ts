@@ -1,5 +1,5 @@
-import { buildConnection, setupSchedulers, startWorkers } from './queues.js';
-import { logger } from './logger.js';
+import { buildConnection, setupSchedulers, startWorkers } from './queues';
+import { logger } from './logger';
 
 async function main() {
   const connection = buildConnection();

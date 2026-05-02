@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { JSX } from 'react';
+import type { ReactNode } from 'react';
 import { cssVariables } from '@smr/theme';
 import './globals.css';
 
@@ -16,9 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Next's generated LayoutProps type can conflict with workspace ReactNode versions in CI.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function RootLayout({ children }: { children: any }): JSX.Element {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { extractToc } from '../toc.js';
-import { readingTimeSeconds } from '../readingTime.js';
+import { extractToc } from '../toc';
+import { readingTimeSeconds } from '../readingTime';
 
 describe('extractToc', () => {
   it('captures H2 and H3 outside code fences', () => {

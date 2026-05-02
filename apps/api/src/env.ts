@@ -41,8 +41,12 @@ function optional(name: string, fallback: string): string {
 export const env = {
   databaseUrl: required('DATABASE_URL'),
   redisUrl: optional('REDIS_URL', 'redis://localhost:6379'),
-  port: Number(optional('API_PORT', '4000')),
-  publicUrl: optional('API_PUBLIC_URL', 'http://localhost:4000'),
+  // Render/Heroku-style hosts inject PORT. Locally we use API_PORT (default 4000).
+  port: Number(process.env.PORT ?? optional('API_PORT', '4000')),
+  publicUrl: optional(
+    'API_PUBLIC_URL',
+    optional('RENDER_EXTERNAL_URL', 'http://localhost:4000'),
+  ),
   siteUrl: optional('NEXT_PUBLIC_SITE_URL', 'http://localhost:3000'),
   adminToken: optional('ADMIN_TOKEN', ''),
   logLevel: optional('LOG_LEVEL', 'info'),

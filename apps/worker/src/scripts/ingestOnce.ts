@@ -1,5 +1,5 @@
-import { runIngest } from '../jobs/ingest.js';
-import { logger } from '../logger.js';
+import { runIngest } from '../jobs/ingest';
+import { logger } from '../logger';
 
 runIngest()
   .then((summary) => {

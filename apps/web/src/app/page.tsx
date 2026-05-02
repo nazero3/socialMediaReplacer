@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import type { JSX } from 'react';
 import { ArticleCard } from '@smr/ui';
 import { getArticles } from '@/lib/api';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -7,7 +6,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 
 export const revalidate = 60;
 
-export default async function HomePage(): Promise<JSX.Element> {
+export default async function HomePage() {
   let items: Awaited<ReturnType<typeof getArticles>>['items'] = [];
   try {
     const data = await getArticles({ limit: 12 });
@@ -21,7 +20,10 @@ export default async function HomePage(): Promise<JSX.Element> {
       <h1 style={{ fontSize: '2.4rem', margin: 0 }}>Today</h1>
       <p className="lede">A finite list. Read what calls to you. Close the tab when you&apos;re done.</p>
       {items.length === 0 ? (
-        <p>No feed items available right now. Try again in a minute.</p>
+        <p>
+          No articles yet. If you just installed, run <code>pnpm --filter @smr/api db:seed</code> or
+          trigger an ingest from the worker.
+        </p>
       ) : (
         <div className="card-list">
           {items.map((a) => (

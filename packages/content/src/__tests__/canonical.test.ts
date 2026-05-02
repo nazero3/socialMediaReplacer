@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalizeUrl, urlHash } from '../canonical.js';
+import { canonicalizeUrl, urlHash } from '../canonical';
 
 describe('canonicalizeUrl', () => {
   it('strips tracking params and fragments', () => {

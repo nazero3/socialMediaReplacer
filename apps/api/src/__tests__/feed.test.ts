@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ArticleSummary } from '@smr/types';
-import { renderAtomFeed } from '../feed.js';
+import { renderAtomFeed } from '../feed';
 
 const sample: ArticleSummary[] = [
   {

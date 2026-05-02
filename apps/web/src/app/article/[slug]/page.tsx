@@ -1,20 +1,14 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import type { JSX } from 'react';
-import { CATEGORY_LABELS, type ArticleDetail } from '@smr/types';
+import { CATEGORY_LABELS } from '@smr/types';
 import { extractToc, formatReadingTime } from '@smr/content';
 import { getArticleBySlug } from '@/lib/api';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { ArticleBody } from '@/components/ArticleBody';
 import { FontSizeToggle } from '@/components/FontSizeToggle';
-import { getFeedArticles } from '@/lib/feeds';
 
 export const revalidate = 300;
-export async function generateStaticParams() {
-  const articles: ArticleDetail[] = await getFeedArticles();
-  return articles.map((a: ArticleDetail) => ({ slug: a.slug }));
-}
 
 export async function generateMetadata({
   params,
@@ -39,11 +33,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function ArticlePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<JSX.Element> {
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   let article;
   try {

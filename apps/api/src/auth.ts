@@ -1,6 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { env } from './env.js';
+import { env } from './env';
 
 export async function requireAdmin(req: FastifyRequest, reply: FastifyReply): Promise<void> {
   const header = req.headers.authorization ?? '';

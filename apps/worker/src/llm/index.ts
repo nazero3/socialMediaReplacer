@@ -1,7 +1,7 @@
-import { env } from '../env.js';
-import { openaiClient } from './openai.js';
-import { templateClient } from './template.js';
-import type { LlmClient } from './types.js';
+import { env } from '../env';
+import { openaiClient } from './openai';
+import { templateClient } from './template';
+import type { LlmClient } from './types';
 
 export function getLlmClient(): LlmClient {
   const provider = env.llmProvider.toLowerCase();
@@ -10,4 +10,4 @@ export function getLlmClient(): LlmClient {
   return templateClient;
 }
 
-export type { LlmClient, DigestRequest, DigestResult, DigestSource } from './types.js';
+export type { LlmClient, DigestRequest, DigestResult, DigestSource } from './types';

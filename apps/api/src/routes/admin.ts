@@ -1,9 +1,9 @@
 import { Queue } from 'bullmq';
 import IORedis from 'ioredis';
 import type { FastifyInstance } from 'fastify';
-import { requireAdmin } from '../auth.js';
-import { prisma } from '../db.js';
-import { env } from '../env.js';
+import { requireAdmin } from '../auth';
+import { prisma } from '../db';
+import { env } from '../env';
 
 let ingestQueue: Queue | null = null;
 function getIngestQueue(): Queue {

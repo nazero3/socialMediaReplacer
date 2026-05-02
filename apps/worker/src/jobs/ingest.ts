@@ -1,8 +1,8 @@
 import { allAdapters, type SourceAdapter } from '@smr/ingest';
 import { CATEGORIES, type Category } from '@smr/types';
-import { prisma } from '../db.js';
-import { env } from '../env.js';
-import { logger } from '../logger.js';
+import { prisma } from '../db';
+import { env } from '../env';
+import { logger } from '../logger';
 
 export interface IngestSummary {
   sourceKind: SourceAdapter['kind'];

@@ -1,6 +1,6 @@
-import { env } from '../env.js';
-import { buildPrompt } from './prompt.js';
-import type { DigestRequest, DigestResult, LlmClient } from './types.js';
+import { env } from '../env';
+import { buildPrompt } from './prompt';
+import type { DigestRequest, DigestResult, LlmClient } from './types';
 
 export const openaiClient: LlmClient = {
   name: 'openai',

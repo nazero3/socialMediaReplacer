@@ -1,9 +1,9 @@
 import { Queue, Worker, type ConnectionOptions, type Job } from 'bullmq';
 import IORedis from 'ioredis';
-import { env } from './env.js';
-import { runIngest } from './jobs/ingest.js';
-import { runDigestForDate } from './jobs/digest.js';
-import { logger } from './logger.js';
+import { env } from './env';
+import { runIngest } from './jobs/ingest';
+import { runDigestForDate } from './jobs/digest';
+import { logger } from './logger';
 
 export const INGEST_QUEUE = 'ingest';
 export const DIGEST_QUEUE = 'digest';

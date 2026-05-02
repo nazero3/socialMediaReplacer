@@ -1,5 +1,5 @@
 import { CATEGORY_LABELS } from '@smr/types';
-import type { DigestRequest, DigestResult, LlmClient } from './types.js';
+import type { DigestRequest, DigestResult, LlmClient } from './types';
 
 /**
  * Deterministic, no-network fallback used when no LLM provider is configured.

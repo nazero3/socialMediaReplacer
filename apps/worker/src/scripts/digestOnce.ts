@@ -1,5 +1,5 @@
-import { runDigestForDate } from '../jobs/digest.js';
-import { logger } from '../logger.js';
+import { runDigestForDate } from '../jobs/digest';
+import { logger } from '../logger';
 
 const arg = process.argv[2];
 const target = arg ? new Date(arg) : new Date();

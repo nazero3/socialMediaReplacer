@@ -1,11 +1,11 @@
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import Fastify from 'fastify';
-import { env } from './env.js';
-import { prisma } from './db.js';
-import { articlesRoutes } from './routes/articles.js';
-import { feedRoutes } from './routes/feed.js';
-import { adminRoutes } from './routes/admin.js';
+import { env } from './env';
+import { prisma } from './db';
+import { articlesRoutes } from './routes/articles';
+import { feedRoutes } from './routes/feed';
+import { adminRoutes } from './routes/admin';
 
 async function build() {
   const app = Fastify({
