@@ -25,6 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Validate DATABASE_URL for CI (Supabase pooler)
+        run: bash scripts/check-github-actions-database-url.sh
+
       - uses: pnpm/action-setup@v4
         with:
           version: 9.12.0
