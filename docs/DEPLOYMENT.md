@@ -8,6 +8,34 @@ This guide deploys the four services and the mobile app:
 4. **Web** — Next.js on Vercel.
 5. **Mobile** — Expo EAS preview build.
 
+## 0) “No-card” option: GitHub Actions instead of a 24/7 worker
+
+If you do not want a paid/always-on worker host (Render/Fly/Railway), you can still run ingestion + digest on a schedule using **GitHub Actions**.
+
+This repo includes:
+
+- `.github/workflows/scheduled-ingest.yml` — runs `pnpm --filter @smr/worker ingest:once` every 6 hours
+- `.github/workflows/scheduled-digest.yml` — runs `pnpm --filter @smr/worker digest:once` daily
+
+### Required GitHub repository secrets
+
+Create these in GitHub → **Settings → Secrets and variables → Actions → New repository secret**:
+
+- `DATABASE_URL` — Supabase Postgres URI
+- `REDDIT_USER_AGENT` — descriptive string (not secret, but stored as a secret is fine)
+
+Optional (recommended):
+
+- `INGEST_LIMIT_PER_SOURCE` — e.g. `20` (if omitted, worker default applies)
+- `LLM_PROVIDER` — e.g. `openai` or `template`
+- `OPENAI_API_KEY` — only if you want LLM digests
+- `OPENAI_MODEL` — e.g. `gpt-4o-mini`
+
+### Notes
+
+- GitHub Actions cron is **best-effort** (can be delayed a few minutes). That is fine for a reader digest product.
+- You still need **Redis** if you use the API admin endpoint that enqueues BullMQ jobs, but the scheduled ingest/digest scripts **do not require Redis**.
+
 ## 1. Provision data services
 - **Postgres 16**: any managed provider. Capture `DATABASE_URL`.
 - **Redis 7**: any managed provider. Capture `REDIS_URL`. Make sure it accepts BullMQ's blocking commands (no eviction policy on keys with TTL set by BullMQ).

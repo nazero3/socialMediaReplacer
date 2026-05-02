@@ -2,6 +2,16 @@ import { buildConnection, setupSchedulers, startWorkers } from './queues';
 import { logger } from './logger';
 
 async function main() {
+  const disable = ['1', 'true', 'yes'].includes(
+    (process.env.DISABLE_BULLMQ_SCHEDULER ?? '').toLowerCase(),
+  );
+  if (disable) {
+    logger.info(
+      'worker: DISABLE_BULLMQ_SCHEDULER is set — skipping BullMQ schedulers/workers (use GitHub Actions cron instead).',
+    );
+    return;
+  }
+
   const connection = buildConnection();
   await setupSchedulers(connection);
   const { close } = startWorkers(connection);

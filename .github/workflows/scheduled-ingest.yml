@@ -1,0 +1,41 @@
+name: Scheduled ingest
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Every 6 hours (UTC). GitHub Actions cron has ~minute-level jitter.
+    - cron: '0 */6 * * *'
+
+concurrency:
+  group: smr-ingest
+  cancel-in-progress: true
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+      INGEST_LIMIT_PER_SOURCE: ${{ secrets.INGEST_LIMIT_PER_SOURCE }}
+      DISABLE_BULLMQ_SCHEDULER: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm --filter @smr/api exec prisma generate
+
+      - name: Run ingest once
+        run: pnpm --filter @smr/worker ingest:once

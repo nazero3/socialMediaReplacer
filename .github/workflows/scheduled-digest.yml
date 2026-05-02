@@ -1,0 +1,43 @@
+name: Scheduled digest
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Daily at 06:05 UTC (slightly after the hour to avoid collisions with other cron jobs).
+    - cron: '5 6 * * *'
+
+concurrency:
+  group: smr-digest
+  cancel-in-progress: true
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+      LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+      DISABLE_BULLMQ_SCHEDULER: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm --filter @smr/api exec prisma generate
+
+      - name: Run digest once (UTC “today”)
+        run: pnpm --filter @smr/worker digest:once
