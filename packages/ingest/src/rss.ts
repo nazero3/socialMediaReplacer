@@ -13,6 +13,7 @@ export interface RssFeedConfig {
 export const DEFAULT_RSS_FEEDS: RssFeedConfig[] = [
   { category: 'news', url: 'https://feeds.bbci.co.uk/news/world/rss.xml', publisher: 'BBC' },
   { category: 'news', url: 'https://www.aljazeera.com/xml/rss/all.xml', publisher: 'Al Jazeera' },
+  { category: 'tech', url: 'https://techcrunch.com/feed/', publisher: 'TechCrunch' },
   { category: 'tech', url: 'https://feeds.arstechnica.com/arstechnica/index', publisher: 'Ars Technica' },
   { category: 'tech', url: 'https://www.theverge.com/rss/index.xml', publisher: 'The Verge' },
   { category: 'diy', url: 'https://makezine.com/feed/', publisher: 'Make:' },
