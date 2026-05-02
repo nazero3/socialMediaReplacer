@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 import { allAdapters, type SourceAdapter } from '@smr/ingest';
 import { CATEGORIES, type Category } from '@smr/types';
 import { prisma } from '../db';
@@ -48,7 +49,7 @@ export async function runIngest(): Promise<IngestSummary[]> {
               publishedAt: s.publishedAt ?? undefined,
               category: s.category,
               language: s.language,
-              payload: s.payload,
+              payload: s.payload as Prisma.InputJsonValue,
             },
           });
           if (!before) inserted += 1;
