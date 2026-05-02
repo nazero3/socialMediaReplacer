@@ -16,6 +16,7 @@ jobs:
     timeout-minutes: 30
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DIRECT_URL: ${{ secrets.DIRECT_URL || secrets.DATABASE_URL }}
       REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
       INGEST_LIMIT_PER_SOURCE: ${{ secrets.INGEST_LIMIT_PER_SOURCE }}
       DISABLE_BULLMQ_SCHEDULER: '1'

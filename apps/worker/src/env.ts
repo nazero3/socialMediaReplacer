@@ -26,7 +26,7 @@ function loadDotEnv(): void {
 
 loadDotEnv();
 
-function normalizeConnectionEnvVar(name: 'DATABASE_URL' | 'REDIS_URL'): void {
+function normalizeConnectionEnvVar(name: 'DATABASE_URL' | 'DIRECT_URL' | 'REDIS_URL'): void {
   const raw = process.env[name];
   if (!raw) return;
 
@@ -47,6 +47,7 @@ function normalizeConnectionEnvVar(name: 'DATABASE_URL' | 'REDIS_URL'): void {
 }
 
 normalizeConnectionEnvVar('DATABASE_URL');
+normalizeConnectionEnvVar('DIRECT_URL');
 normalizeConnectionEnvVar('REDIS_URL');
 
 function required(name: string): string {

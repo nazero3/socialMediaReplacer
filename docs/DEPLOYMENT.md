@@ -21,7 +21,8 @@ This repo includes:
 
 Create these in GitHub → **Settings → Secrets and variables → Actions → New repository secret**:
 
-- `DATABASE_URL` — Supabase Postgres URI
+- `DATABASE_URL` — Supabase **pooler / transaction mode** URI (recommended for CI), usually port **6543** and includes `pgbouncer=true`
+- `DIRECT_URL` — Supabase **session pooler** or **direct** URI for Prisma “direct” connections (port **5432** on the pooler host in Supabase’s Prisma snippet)
 - `REDDIT_USER_AGENT` — descriptive string (not secret, but stored as a secret is fine)
 
 Optional (recommended):
@@ -30,6 +31,8 @@ Optional (recommended):
 - `LLM_PROVIDER` — e.g. `openai` or `template`
 - `OPENAI_API_KEY` — only if you want LLM digests
 - `OPENAI_MODEL` — e.g. `gpt-4o-mini`
+
+If you do not set `DIRECT_URL`, the workflows fall back to `DATABASE_URL` (works for local docker, but for Supabase you should set both URLs as Supabase documents).
 
 ### Notes
 

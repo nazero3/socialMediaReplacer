@@ -3,6 +3,7 @@
   "ui": "tui",
   "globalEnv": [
     "DATABASE_URL",
+    "DIRECT_URL",
     "REDIS_URL",
     "API_PORT",
     "API_PUBLIC_URL",
